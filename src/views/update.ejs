@@ -16,21 +16,22 @@
         <a href="">Update a user</a>
     </div>
     <div class="form-container">
-        <form class="m-3" action="/create-user" method="POST" autocomplete="on">
+        <form class="m-3" action="/update-user" method="POST" autocomplete="on">
+            <div class="mb-3 d-none">
+                <label for="exampleInputEmail1" class="form-label">Id</label>
+                <input value="<%=userArr.id%>" type="text" class="form-control" name="id">
+            </div>
             <div class="mb-3">
                 <label for="exampleInputEmail1" class="form-label">Email</label>
-                <input value="<%=userArr.email%>" type="text" class="form-control" id="exampleInputEmail1" name="email"
-                    aria-describedby="emailHelp">
+                <input value="<%=userArr.email%>" type="text" class="form-control" name="email">
             </div>
             <div class="mb-3">
                 <label for="name" class="form-label">Your Name</label>
-                <input value="<%=userArr.name%>" type="text" class="form-control" id="name" name="name"
-                    aria-describedby="emailHelp">
+                <input value="<%=userArr.name%>" type="text" class="form-control" name="name">
             </div>
             <div class="mb-3">
                 <label for="city" class="form-label">Your City</label>
-                <input value="<%=userArr.city%>" type="text" class="form-control" id="city" name="city"
-                    aria-describedby="emailHelp">
+                <input value="<%=userArr.city%>" type="text" class="form-control" name="city">
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

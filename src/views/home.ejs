@@ -13,7 +13,7 @@
 <body>
     <div class="topnav">
         <a class="active" href="/">Home</a>
-        <a href="/create">News</a>
+        <a href="/create">Create Users</a>
     </div>
     <table class="table table-striped">
         <thead>
@@ -40,10 +40,16 @@
                     <td>
                         <%=listUsers[i].city%>
                     </td>
-                    <td>
+                    <td class="form-action">
                         <button type="submit" class="btn btn-warning"><a
                                 href="/update/<%=listUsers[i].id%>">Edit</a></button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <form action="/delete-user" method="POST">
+                            <div class="mb-3 d-none">
+                                <label for="exampleInputEmail1" class="form-label">Id</label>
+                                <input value="<%=listUsers[i].id%>" type="text" class="form-control" name="id">
+                            </div>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
                     </td>
                 </tr>
                 <% } %>

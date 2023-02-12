@@ -1,20 +1,8 @@
 const connection = require("../config/database")
-const { getAllUsers, getUserById } = require("../services/CRUDServices")
+const { getAllUsers, getUserById, creatUsers } = require("../services/CRUDServices")
 const getHome = async (req, res) => {
     const results = await getAllUsers()
     return res.render("home.ejs", { listUsers: results })
-}
-
-const postCreateUsers = async (req, res) => {
-    let email = req.body.email
-    let name = req.body.name
-    let city = req.body.city
-    const [rows, fields] = await connection.execute(
-        `INSERT INTO Users(email, name, city)
-    VALUES (?, ?, ?);`,
-        [email, name, city],
-    )
-    res.send("created success completed !")
 }
 
 const getCreateUsers = (req, res) => {
@@ -26,13 +14,37 @@ const getUpdateUsers = async (req, res) => {
     res.render("update.ejs", { userArr: userArr })
 }
 const getStaticFile = (req, res) => {
-    // res.send("<h1>Hello Manhhong!</h1>")
     res.render("sample.ejs")
+}
+const postCreateUsers = async (req, res) => {
+    // let email = req.body.email
+    // let name = req.body.name
+    // let city = req.body.city
+    const { email, name, city } = req.body
+    await creatUsers(email, name, city)
+    res.redirect("/")
+}
+const postUpdateUsers = async (req, res) => {
+    const { email, name, city, id } = req.body
+    const [rows, fields] = await connection.execute(
+        `   UPDATE Users
+            SET email = ?, name = ?, city = ?
+            WHERE id = ?`,
+        [email, name, city, id],
+    )
+    res.redirect("/")
+}
+const postDeleteUsers = async (req, res) => {
+    const { id } = req.body
+    const [rows, fields] = await connection.execute(`DELETE FROM Users WHERE id = ?;`, [id])
+    res.redirect("/")
 }
 module.exports = {
     getHome,
     getStaticFile,
-    postCreateUsers,
     getCreateUsers,
     getUpdateUsers,
+    postCreateUsers,
+    postUpdateUsers,
+    postDeleteUsers,
 }

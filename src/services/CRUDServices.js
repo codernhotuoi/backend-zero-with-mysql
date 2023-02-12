@@ -8,4 +8,11 @@ const getUserById = async (userId) => {
     const userArr = rows && rows.length > 0 ? rows[0] : {}
     return userArr
 }
-module.exports = { getAllUsers, getUserById }
+const creatUsers = async (email, name, city) => {
+    const [rows, fields] = await connection.execute(
+        `INSERT INTO Users(email, name, city)
+    VALUES (?, ?, ?);`,
+        [email, name, city],
+    )
+}
+module.exports = { getAllUsers, getUserById, creatUsers }

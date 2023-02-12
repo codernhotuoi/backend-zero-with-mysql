@@ -6,6 +6,13 @@ a {
     color: #fff !important;
     text-decoration: none !important;
 }
+.form-action {
+    display: flex;
+    gap: 5px;
+}
+.d-none {
+    display: none;
+}
 /* Add a black background color to the top navigation */
 .topnav {
     background-color: #333;
