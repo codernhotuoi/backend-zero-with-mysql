@@ -1,11 +1,11 @@
 const connection = require("../config/database")
+const User = require("../models/user")
 const getAllUsers = async () => {
-    let [results, fields] = await connection.execute("select * from Users")
+    let results = await User.find({})
     return results
 }
 const getUserById = async (userId) => {
-    const [rows, fields] = await connection.execute(`SELECT * FROM Users WHERE id = ?;`, [userId])
-    const userArr = rows && rows.length > 0 ? rows[0] : {}
+    const userArr = await User.findById(userId).exec()
     return userArr
 }
 const creatUsers = async (email, name, city) => {
